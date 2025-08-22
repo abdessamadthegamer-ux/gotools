@@ -6,24 +6,19 @@
     <title>GoTools - DIY Home & Tool Comparison Guide</title>
     <meta name="description" content="Smart tool buying decisions for DIY enthusiasts. Compare prices, read honest reviews, and save money on home improvement tools.">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1e293b;
-            --primary-light: #334155;
-            --accent: #f97316;
-            --accent-dark: #ea580c;
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #0ea5e9;
+            --accent: #f59e0b;
             --success: #10b981;
-            --info: #3b82f6;
+            --danger: #ef4444;
             --dark: #0f172a;
-            --light: #f8fafc;
             --gray: #64748b;
-            --gray-light: #e2e8f0;
-            --yellow: #fbbf24;
-            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --gradient-dark: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            --light: #f8fafc;
+            --white: #ffffff;
         }
 
         * {
@@ -35,33 +30,25 @@
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            color: var(--primary);
-            background: var(--light);
-            overflow-x: hidden;
+            color: var(--dark);
+            background: #ffffff;
         }
 
         .container {
-            max-width: 1280px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        /* Modern Header */
+        /* Header */
         header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--gray-light);
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        header.scrolled {
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
         }
 
         .header-content {
@@ -72,38 +59,26 @@
         }
 
         .logo {
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--primary);
+            font-weight: 800;
+            color: white;
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 12px;
-            transition: transform 0.3s ease;
-        }
-
-        .logo:hover {
-            transform: translateY(-2px);
+            gap: 10px;
         }
 
         .logo-icon {
-            background: var(--gradient-1);
+            background: var(--accent);
             color: white;
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 20px;
-            box-shadow: 0 4px 14px rgba(102, 126, 234, 0.4);
-            animation: pulse 3s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
         }
 
         .nav {
@@ -113,152 +88,54 @@
         }
 
         .nav a {
-            color: var(--gray);
+            color: rgba(255,255,255,0.9);
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.95rem;
             transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav a:after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 3px;
-            background: var(--gradient-1);
-            border-radius: 2px;
-            transition: width 0.3s ease;
         }
 
         .nav a:hover {
-            color: var(--primary);
-        }
-
-        .nav a:hover:after {
-            width: 100%;
+            color: var(--accent);
         }
 
         .nav-cta {
-            background: var(--gradient-1);
+            background: var(--accent);
             color: white !important;
-            padding: 10px 24px;
-            border-radius: 50px;
+            padding: 10px 20px;
+            border-radius: 8px;
             font-weight: 600;
-            box-shadow: 0 4px 14px rgba(102, 126, 234, 0.4);
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
         }
 
         .nav-cta:hover {
+            background: #dc2626;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.5);
         }
 
-        .nav-cta:after {
-            display: none;
-        }
-
-        /* Mobile Menu Toggle */
-        .mobile-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--primary);
-            cursor: pointer;
-        }
-
-        /* Hero Section - Modern Design */
+        /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 140px 0 80px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -50%;
-            width: 200%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.05"><path d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/></g></g></svg>');
-            animation: float 20s linear infinite;
-        }
-
-        @keyframes float {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(50%); }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            padding: 120px 0 80px;
             color: white;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            animation: slideDown 0.6s ease;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            text-align: center;
         }
 
         .hero h1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 3rem;
             font-weight: 800;
-            color: white;
             margin-bottom: 1.5rem;
-            line-height: 1.1;
-            animation: slideUp 0.8s ease;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            background: linear-gradient(to right, #60a5fa, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero p {
             font-size: 1.25rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 2.5rem;
-            line-height: 1.6;
-            animation: slideUp 0.8s ease 0.2s both;
+            margin-bottom: 2rem;
+            color: rgba(255,255,255,0.8);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .hero-buttons {
@@ -266,51 +143,48 @@
             gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
-            animation: slideUp 0.8s ease 0.4s both;
         }
 
         .btn {
-            padding: 14px 32px;
-            border-radius: 50px;
+            padding: 12px 28px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            font-size: 1rem;
+            gap: 8px;
             cursor: pointer;
             border: none;
         }
 
         .btn-primary {
-            background: white;
-            color: var(--primary);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: var(--accent);
+            color: white;
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            background: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(239,68,68,0.3);
         }
 
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: transparent;
             color: white;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            border: 2px solid white;
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: white;
+            background: white;
+            color: var(--dark);
         }
 
-        /* Stats Section */
-        .stats {
+        /* Stats Bar */
+        .stats-bar {
             background: white;
             padding: 3rem 0;
-            border-bottom: 1px solid var(--gray-light);
+            border-bottom: 1px solid #e5e7eb;
         }
 
         .stats-grid {
@@ -320,28 +194,14 @@
             text-align: center;
         }
 
-        .stat-item {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s ease forwards;
-        }
-
-        .stat-item:nth-child(1) { animation-delay: 0.1s; }
-        .stat-item:nth-child(2) { animation-delay: 0.2s; }
-        .stat-item:nth-child(3) { animation-delay: 0.3s; }
-        .stat-item:nth-child(4) { animation-delay: 0.4s; }
-
-        .stat-number {
-            font-size: 2.5rem;
+        .stat-item h3 {
+            font-size: 2rem;
             font-weight: 800;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
         }
 
-        .stat-label {
+        .stat-item p {
             color: var(--gray);
             font-size: 0.875rem;
             text-transform: uppercase;
@@ -350,45 +210,45 @@
 
         /* Main Content */
         .main-content {
-            padding: 5rem 0;
-            background: linear-gradient(to bottom, white, var(--light));
+            padding: 4rem 0;
+            background: #f9fafb;
         }
 
         .content-grid {
             display: grid;
             grid-template-columns: 1fr 350px;
-            gap: 3rem;
+            gap: 2rem;
         }
 
         .article {
             background: white;
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
         .article-header {
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
         }
 
         .article-badge {
-            background: var(--gradient-2);
+            background: linear-gradient(135deg, var(--accent), var(--danger));
             color: white;
-            padding: 6px 16px;
-            border-radius: 50px;
+            padding: 6px 14px;
+            border-radius: 20px;
             font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             display: inline-block;
             margin-bottom: 1rem;
         }
 
         .article-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.5rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2.25rem;
             font-weight: 800;
-            color: var(--primary);
+            color: var(--dark);
             margin-bottom: 1rem;
             line-height: 1.2;
         }
@@ -398,203 +258,117 @@
             font-size: 0.875rem;
             display: flex;
             gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .article-meta span {
-            display: flex;
-            align-items: center;
-            gap: 6px;
         }
 
         .article-intro {
-            background: linear-gradient(135deg, #667eea15, #764ba215);
-            border-left: 4px solid;
-            border-image: var(--gradient-1);
-            border-image-slice: 1;
+            background: linear-gradient(135deg, #dbeafe, #dcfce7);
+            border-left: 4px solid var(--primary);
             padding: 1.5rem;
-            margin-bottom: 2rem;
-            border-radius: 0 12px 12px 0;
-            font-size: 1.125rem;
-            line-height: 1.7;
-            color: var(--primary);
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 1.1rem;
+            line-height: 1.6;
         }
 
-        /* Comparison Table - Modern Style */
+        /* Comparison Table */
         .comparison-section {
             margin: 3rem 0;
         }
 
         .section-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.75rem;
             font-weight: 700;
-            margin-bottom: 2rem;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .section-title::before {
-            content: '';
-            height: 4px;
-            width: 40px;
-            background: var(--gradient-1);
-            border-radius: 2px;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
         }
 
         .comparison-table {
             width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            border-radius: 16px;
+            border-collapse: collapse;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 0 0 1px var(--gray-light);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             margin-bottom: 2rem;
         }
 
         .comparison-table th {
-            background: var(--gradient-dark);
+            background: var(--dark);
             color: white;
             padding: 1rem;
             text-align: left;
             font-weight: 600;
             font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .comparison-table td {
-            padding: 1.25rem 1rem;
-            border-bottom: 1px solid var(--gray-light);
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
             background: white;
         }
 
-        .comparison-table tbody tr {
-            transition: all 0.3s ease;
-        }
-
         .comparison-table tbody tr:hover {
-            background: linear-gradient(90deg, #667eea08, #764ba208);
-            transform: scale(1.02);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        }
-
-        .comparison-table tbody tr:last-child td {
-            border-bottom: none;
+            background: #f9fafb;
         }
 
         .tool-name {
             font-weight: 600;
-            color: var(--primary);
-            font-size: 0.95rem;
+            color: var(--dark);
         }
 
         .price {
             font-weight: 700;
-            color: var(--primary);
-            font-size: 1.1rem;
-        }
-
-        .price.sale {
-            color: var(--success);
-        }
-
-        .price.original {
-            text-decoration: line-through;
-            color: var(--gray);
-            font-weight: 400;
-            font-size: 0.9rem;
+            color: var(--dark);
+            font-size: 1.125rem;
         }
 
         .savings {
-            background: linear-gradient(135deg, #10b981, #059669);
+            background: var(--success);
             color: white;
             padding: 4px 12px;
-            border-radius: 50px;
+            border-radius: 20px;
             font-weight: 600;
             font-size: 0.875rem;
             display: inline-block;
         }
 
         .highlight-box {
-            background: var(--gradient-1);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             padding: 2rem;
-            border-radius: 16px;
+            border-radius: 12px;
             text-align: center;
             margin: 2rem 0;
-            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .highlight-box::before {
-            content: '✨';
-            position: absolute;
-            top: -20px;
-            right: -20px;
-            font-size: 100px;
-            opacity: 0.1;
-            animation: spin 10s linear infinite;
-        }
-
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
         }
 
         .highlight-title {
             font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
+            margin-bottom: 0.5rem;
         }
 
-        /* Sidebar - Modern Cards */
+        /* Sidebar */
         .sidebar {
             display: flex;
             flex-direction: column;
-            gap: 2rem;
-            position: sticky;
-            top: 100px;
-            height: fit-content;
+            gap: 1.5rem;
         }
 
         .sidebar-section {
             background: white;
             padding: 1.5rem;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-        }
-
-        .sidebar-section:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
         .sidebar-title {
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 1.125rem;
             font-weight: 700;
-            margin-bottom: 1.25rem;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .sidebar-title i {
-            font-size: 1rem;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e5e7eb;
         }
 
         .category-list {
@@ -610,199 +384,119 @@
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             padding: 0.5rem;
-            border-radius: 8px;
+            border-radius: 6px;
             transition: all 0.3s ease;
             font-size: 0.9rem;
         }
 
         .category-list a:hover {
-            background: linear-gradient(90deg, #667eea08, #764ba208);
+            background: #f3f4f6;
             color: var(--primary);
-            transform: translateX(4px);
         }
 
         .category-count {
-            background: var(--gray-light);
+            background: #f3f4f6;
             color: var(--gray);
             font-size: 0.75rem;
             padding: 2px 8px;
-            border-radius: 50px;
+            border-radius: 10px;
             font-weight: 600;
             margin-left: auto;
         }
 
-        /* Deal Alert Card */
-        .deal-alert-card {
-            background: var(--gradient-3);
-            color: white;
-            padding: 1.5rem;
-            border-radius: 16px;
-            text-align: center;
-        }
-
-        .deal-alert-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .deal-alert-card p {
-            font-size: 0.875rem;
-            margin-bottom: 1rem;
-            opacity: 0.95;
-        }
-
-        .deal-alert-card .btn {
-            background: white;
-            color: var(--primary);
-            padding: 10px 20px;
-            font-size: 0.875rem;
-        }
-
-        /* Featured Tools Grid */
+        /* Featured Tools */
         .featured-tools {
-            padding: 5rem 0;
+            padding: 4rem 0;
             background: white;
         }
 
-        .featured-tools-header {
+        .featured-header {
             text-align: center;
             margin-bottom: 3rem;
         }
 
-        .featured-tools-title {
-            font-family: 'Space Grotesk', sans-serif;
+        .featured-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 2.5rem;
             font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .featured-tools-subtitle {
-            color: var(--gray);
-            font-size: 1.125rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
         }
 
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
         }
 
         .tool-card {
             background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
             transition: all 0.3s ease;
             cursor: pointer;
         }
 
         .tool-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
-        .tool-card-image {
-            height: 200px;
-            background: var(--gradient-1);
+        .tool-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-card h3 {
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .tool-price {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4rem;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tool-card-image::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
-            animation: shine 3s infinite;
-        }
-
-        @keyframes shine {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-
-        .tool-card-content {
-            padding: 1.5rem;
-        }
-
-        .tool-card-title {
-            font-size: 1.125rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .tool-card-price {
-            display: flex;
-            align-items: center;
             gap: 0.75rem;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
         }
 
-        .tool-card-price .current {
+        .price-current {
             font-size: 1.5rem;
             font-weight: 800;
             color: var(--success);
         }
 
-        .tool-card-price .original {
+        .price-original {
             font-size: 1rem;
             color: var(--gray);
             text-decoration: line-through;
         }
 
-        .tool-card-badge {
-            background: var(--gradient-2);
+        .tool-badge {
+            background: var(--danger);
             color: white;
             padding: 4px 12px;
-            border-radius: 50px;
+            border-radius: 20px;
             font-size: 0.75rem;
             font-weight: 600;
-            display: inline-block;
         }
 
-        /* Newsletter - Modern Design */
+        /* Newsletter */
         .newsletter {
-            background: var(--gradient-dark);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
-            padding: 5rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .newsletter::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.03"><path d="M20 20v-10h-2v10h-10v2h10v10h2v-10h10v-2h-10z"/></g></g></svg>');
-        }
-
-        .newsletter-content {
-            position: relative;
-            z-index: 1;
+            padding: 4rem 0;
             text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
         }
 
         .newsletter h2 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 800;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2rem;
             margin-bottom: 1rem;
         }
 
@@ -821,140 +515,430 @@
 
         .newsletter-input {
             flex: 1;
-            padding: 14px 20px;
+            padding: 12px 20px;
             border: none;
-            border-radius: 50px;
+            border-radius: 8px;
             font-size: 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .newsletter-input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .newsletter-input:focus {
-            outline: none;
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.4);
         }
 
         .newsletter-button {
-            background: var(--gradient-1);
+            background: var(--accent);
             color: white;
             border: none;
-            padding: 14px 32px;
-            border-radius: 50px;
+            padding: 12px 24px;
+            border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            white-space: nowrap;
         }
 
         .newsletter-button:hover {
+            background: var(--danger);
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
         }
 
-        /* Footer - Clean Modern */
+        /* Footer */
         footer {
-            background: var(--primary);
+            background: var(--dark);
             color: white;
-            padding: 4rem 0 2rem;
+            padding: 3rem 0 1.5rem;
         }
 
         .footer-content {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 3rem;
-            margin-bottom: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
         }
 
-        .footer-brand h3 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.5rem;
+        .footer-section h3 {
             margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .footer-brand p {
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
             color: white;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background: var(--gradient-1);
-            transform: translateY(-4px);
-        }
-
-        .footer-section h4 {
-            margin-bottom: 1.25rem;
-            font-size: 1rem;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.125rem;
         }
 
         .footer-section a {
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255,255,255,0.7);
             text-decoration: none;
             display: block;
-            margin-bottom: 0.75rem;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
         }
 
         .footer-section a:hover {
-            color: white;
-            transform: translateX(4px);
+            color: var(--accent);
         }
 
         .footer-bottom {
             text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.875rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
         }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .article {
+                padding: 1.5rem;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <div class="logo-icon">🔧</div>
+                    GoTools
+                </a>
+                <nav class="nav">
+                    <a href="#home">Home</a>
+                    <a href="#tools">Tools</a>
+                    <a href="#comparisons">Comparisons</a>
+                    <a href="#guides">Guides</a>
+                    <a href="#newsletter" class="nav-cta">Get Free Guide</a>
+                </nav>
+            </div>
+        </div>
+    </header>
 
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
+    <main>
+        <section class="hero" id="home">
+            <div class="container">
+                <h1>Save Big on Every Tool Purchase</h1>
+                <p>Compare prices across all major retailers and never overpay for tools again. Join 10,000+ smart DIYers saving money daily.</p>
+                <div class="hero-buttons">
+                    <a href="#newsletter" class="btn btn-primary">
+                        <i class="fas fa-download"></i>
+                        Get Free Buying Guide
+                    </a>
+                    <a href="#comparison" class="btn btn-secondary">
+                        <i class="fas fa-search"></i>
+                        Browse Tool Deals
+                    </a>
+                </div>
+            </div>
+        </section>
 
-        .animate-on-scroll.visible {
+        <section class="stats-bar">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h3>$2.4M+</h3>
+                        <p>Saved by Users</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>15,000+</h3>
+                        <p>Tools Compared</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>45%</h3>
+                        <p>Average Savings</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>4.9★</h3>
+                        <p>User Rating</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="main-content" id="comparison">
+            <div class="container">
+                <div class="content-grid">
+                    <article class="article">
+                        <header class="article-header">
+                            <div class="article-badge">🔥 Hot Deal Alert</div>
+                            <h1 class="article-title">DEWALT 20V MAX: Same Drill, $160 Less!</h1>
+                            <div class="article-meta">
+                                <span><i class="fas fa-calendar"></i> January 2025</span>
+                                <span><i class="fas fa-clock"></i> 5 min read</span>
+                                <span><i class="fas fa-eye"></i> 2.3k views</span>
+                            </div>
+                        </header>
+
+                        <div class="article-intro">
+                            <strong>Shocking Discovery:</strong> The exact same DEWALT 20V MAX drill kit costs $259 at Home Depot but only $99 on Amazon. That's a massive $160 difference!
+                        </div>
+
+                        <section class="comparison-section">
+                            <h2 class="section-title">📊 Live Price Comparison</h2>
+                            
+                            <table class="comparison-table">
+                                <thead>
+                                    <tr>
+                                        <th>Store & Product</th>
+                                        <th>Regular Price</th>
+                                        <th>Sale Price</th>
+                                        <th>You Save</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="tool-name">Amazon - DEWALT 20V Kit</td>
+                                        <td class="price">$179</td>
+                                        <td class="price">$99</td>
+                                        <td><span class="savings">Save $80</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tool-name">Amazon - 2-Tool Combo</td>
+                                        <td class="price">$239</td>
+                                        <td class="price">$124</td>
+                                        <td><span class="savings">Save $115</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tool-name">Home Depot - XR Kit</td>
+                                        <td class="price">$349</td>
+                                        <td class="price">$259</td>
+                                        <td><span class="savings">Save $90</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tool-name">Harbor Freight - Hercules</td>
+                                        <td class="price">$99</td>
+                                        <td class="price">$79</td>
+                                        <td><span class="savings">Budget Pick</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="highlight-box">
+                                <div class="highlight-title">🏆 Best Deal: Amazon at $99</div>
+                                <p>Limited time offer - This price won't last long. Set up price alerts to catch the next deal!</p>
+                            </div>
+                        </section>
+
+                        <section class="comparison-section">
+                            <h2 class="section-title">💡 Smart Shopping Tips</h2>
+                            <ul style="line-height: 2; padding-left: 1.5rem;">
+                                <li><strong>Price Match:</strong> Home Depot will match Amazon prices</li>
+                                <li><strong>Best Times:</strong> Black Friday and Prime Day see 40-60% off</li>
+                                <li><strong>Stack Savings:</strong> Use cashback cards for extra 2-5% off</li>
+                                <li><strong>Flash Sales:</strong> Amazon runs 24-hour tool deals weekly</li>
+                                <li><strong>Return Windows:</strong> Compare return policies before buying</li>
+                            </ul>
+                        </section>
+                    </article>
+
+                    <aside class="sidebar">
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-title">Tool Categories</h3>
+                            <ul class="category-list">
+                                <li>
+                                    <a href="#power-tools">
+                                        <i class="fas fa-bolt" style="color: var(--accent);"></i>
+                                        Power Tools
+                                        <span class="category-count">142</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#hand-tools">
+                                        <i class="fas fa-hammer" style="color: var(--primary);"></i>
+                                        Hand Tools
+                                        <span class="category-count">89</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#cordless">
+                                        <i class="fas fa-battery-full" style="color: var(--success);"></i>
+                                        Cordless Tools
+                                        <span class="category-count">76</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#garden">
+                                        <i class="fas fa-leaf" style="color: #059669;"></i>
+                                        Garden Tools
+                                        <span class="category-count">54</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-title">Trending Now</h3>
+                            <ul class="category-list">
+                                <li><a href="#">DEWALT vs Milwaukee</a></li>
+                                <li><a href="#">Best Drills Under $100</a></li>
+                                <li><a href="#">Harbor Freight Gems</a></li>
+                                <li><a href="#">Amazon Tool Deals</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-section" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; text-align: center;">
+                            <h3 style="color: white; border-bottom: none;">🎉 Deal Alerts</h3>
+                            <p style="margin-bottom: 1rem;">Get instant notifications for price drops</p>
+                            <a href="#newsletter" class="btn" style="background: white; color: var(--primary); padding: 10px 20px;">
+                                Enable Alerts
+                            </a>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-tools" id="tools">
+            <div class="container">
+                <div class="featured-header">
+                    <h2 class="featured-title">Today's Best Tool Deals</h2>
+                    <p style="color: var(--gray);">Hand-picked deals updated daily</p>
+                </div>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-icon">🔨</div>
+                        <h3>DEWALT Impact Driver</h3>
+                        <div class="tool-price">
+                            <span class="price-current">$89</span>
+                            <span class="price-original">$149</span>
+                        </div>
+                        <span class="tool-badge">40% OFF</span>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon">🪚</div>
+                        <h3>Milwaukee Circular Saw</h3>
+                        <div class="tool-price">
+                            <span class="price-current">$179</span>
+                            <span class="price-original">$279</span>
+                        </div>
+                        <span class="tool-badge">36% OFF</span>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon">🔧</div>
+                        <h3>Craftsman Tool Set</h3>
+                        <div class="tool-price">
+                            <span class="price-current">$199</span>
+                            <span class="price-original">$399</span>
+                        </div>
+                        <span class="tool-badge">50% OFF</span>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon">⚡</div>
+                        <h3>Ryobi Combo Kit</h3>
+                        <div class="tool-price">
+                            <span class="price-current">$299</span>
+                            <span class="price-original">$449</span>
+                        </div>
+                        <span class="tool-badge">33% OFF</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="newsletter" id="newsletter">
+            <div class="container">
+                <h2>Never Miss a Tool Deal</h2>
+                <p>Join 10,000+ DIYers getting weekly price alerts and exclusive deals</p>
+                <form class="newsletter-form" id="emailForm">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+                    <button type="submit" class="newsletter-button">
+                        Get Free Guide
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>GoTools</h3>
+                    <p style="color: rgba(255,255,255,0.7); line-height: 1.6;">Your trusted companion for smart tool shopping. Save money on every purchase.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="#">Power Tools</a>
+                    <a href="#">Hand Tools</a>
+                    <a href="#">Today's Deals</a>
+                    <a href="#">Buying Guides</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <a href="#">Price Comparisons</a>
+                    <a href="#">Brand Guides</a>
+                    <a href="#">Pro Tips</a>
+                    <a href="#">FAQ</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <a href="#">About Us</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 GoTools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Newsletter form
+        document.getElementById('emailForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const button = this.querySelector('.newsletter-button');
+            const originalText = button.innerHTML;
+            
+            button.innerHTML = 'Processing...';
+            button.style.opacity = '0.7';
+            
+            setTimeout(() => {
+                button.innerHTML = '✓ Success!';
+                button.style.background = 'var(--success)';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.background = '';
+                    button.style.opacity = '1';
+                    this.reset();
+                }, 2000);
+            }, 1000);
+        });
+
+        // Add animation on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.15)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            }
+        });
+    </script>
+</body>
+</html>
