@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TikTok Puzzle Challenge - Can You Solve It?</title>
+    <title>GoTools Games - Free Online Puzzle Games</title>
+    <meta name="description" content="Play the best free online puzzle games! Challenge your brain with our collection of addictive puzzle games, brain teasers, and mind games.">
+    <meta name="keywords" content="puzzle games, brain games, online games, free games, mind games, brain teasers">
+    <meta name="author" content="GoTools Games">
     <style>
         * {
             margin: 0;
@@ -12,654 +15,626 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            overflow: hidden;
-            touch-action: manipulation;
-            color: white;
-        }
-
-        .game-container {
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            position: relative;
+            min-height: 100vh;
         }
 
         .header {
-            background: rgba(0,0,0,0.8);
-            padding: 15px 20px;
-            text-align: center;
-            border-bottom: 3px solid #ff6b6b;
-        }
-
-        .challenge-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .timer {
-            font-size: 24px;
-            color: #ff6b6b;
-            font-weight: bold;
-        }
-
-        .game-area {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .puzzle-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(4, 1fr);
-            gap: 8px;
-            width: 300px;
-            height: 300px;
-            background: rgba(255,255,255,0.1);
-            padding: 15px;
-            border-radius: 20px;
-            border: 3px solid #ffd700;
-        }
-
-        .puzzle-piece {
-            background: linear-gradient(145deg, #ff6b6b, #ee5a52);
-            border: 2px solid #fff;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            user-select: none;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .puzzle-piece:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
-        }
-
-        .puzzle-piece.empty {
-            background: rgba(255,255,255,0.2);
-            border: 2px dashed rgba(255,255,255,0.5);
-        }
-
-        .puzzle-piece.correct {
-            background: linear-gradient(145deg, #00b894, #00a085);
-            animation: correctPulse 0.6s ease;
-        }
-
-        @keyframes correctPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-
-        .controls {
-            background: rgba(0,0,0,0.7);
-            padding: 20px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-
-        .btn {
-            background: linear-gradient(45deg, #ffd700, #ffed4e);
-            border: none;
-            padding: 12px 20px;
-            border-radius: 25px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            color: #333;
-            transition: transform 0.2s ease;
-            min-width: 100px;
-        }
-
-        .btn:hover {
-            transform: scale(1.05);
-        }
-
-        .btn-share {
-            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
-            color: white;
-            animation: shareGlow 2s infinite;
-        }
-
-        @keyframes shareGlow {
-            0%, 100% { box-shadow: 0 0 10px rgba(255, 107, 107, 0.5); }
-            50% { box-shadow: 0 0 20px rgba(255, 107, 107, 0.8); }
-        }
-
-        .victory-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
             background: rgba(0,0,0,0.9);
-            display: none;
-            align-items: center;
-            justify-content: center;
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
             z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
-        .victory-content {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            border: 3px solid #ffd700;
-            max-width: 90%;
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
         }
 
-        .victory-title {
-            font-size: 32px;
-            margin-bottom: 20px;
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
             color: #ffd700;
         }
 
-        .victory-stats {
-            font-size: 18px;
-            margin: 15px 0;
-        }
-
-        .viral-challenge {
-            position: fixed;
-            bottom: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 107, 107, 0.9);
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: bold;
-            animation: bounce 2s infinite;
-            z-index: 500;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-10px); }
-            60% { transform: translateX(-50%) translateY(-5px); }
-        }
-
-        .difficulty-indicator {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 107, 107, 0.8);
-            padding: 8px 15px;
-            border-radius: 15px;
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        .moves-counter {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(0, 184, 148, 0.8);
-            padding: 8px 15px;
-            border-radius: 15px;
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        /* TikTok-style elements */
-        .tiktok-ui {
-            position: fixed;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
+        .nav-menu {
             display: flex;
-            flex-direction: column;
-            gap: 20px;
-            z-index: 600;
+            list-style: none;
+            gap: 2rem;
         }
 
-        .tiktok-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 2px solid white;
-            background: rgba(0,0,0,0.6);
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: #ffd700;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        .main-content {
+            margin-top: 80px;
+            min-height: calc(100vh - 160px);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9));
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #333;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .game-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            border-color: #ffd700;
+        }
+
+        .game-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .game-title {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .game-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .play-button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .play-button:hover {
+            transform: scale(1.05);
+        }
+
+        .features-section {
+            background: rgba(255,255,255,0.95);
+            padding: 4rem 2rem;
+            margin: 4rem 0;
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .features-title {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 2rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer {
+            background: rgba(0,0,0,0.9);
+            color: white;
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #ffd700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #ffd700;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #444;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            text-align: center;
+            color: #ccc;
+        }
+
+        .stats-section {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Ad placeholder styles */
+        .ad-container {
+            background: #f0f0f0;
+            border: 2px dashed #ccc;
+            padding: 2rem;
+            margin: 2rem auto;
+            text-align: center;
+            border-radius: 10px;
+            max-width: 728px;
+        }
+
+        .ad-container.banner {
+            height: 90px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
-            cursor: pointer;
-            transition: transform 0.2s ease;
         }
 
-        .tiktok-btn:hover {
-            transform: scale(1.1);
+        .ad-container.sidebar {
+            width: 300px;
+            height: 250px;
+            float: right;
+            margin: 1rem 0 1rem 2rem;
         }
 
-        .record-indicator {
-            position: fixed;
-            top: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #ff0040;
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 12px;
-            display: none;
-            animation: recordBlink 1s infinite;
-        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
 
-        @keyframes recordBlink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0.5; }
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .games-grid {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .ad-container.sidebar {
+                float: none;
+                width: 100%;
+                max-width: 320px;
+                height: 150px;
+                margin: 1rem auto;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="game-container">
-        <!-- Header -->
-        <div class="header">
-            <div class="challenge-title">🔥 Daily Puzzle Challenge 🔥</div>
-            <div class="timer" id="timer">30</div>
-        </div>
+    <!-- Header Navigation -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">🎮 GoTools Games</div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#games">Games</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy-policy.html">Privacy</a></li>
+                <li><a href="terms.html">Terms</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
 
-        <!-- Difficulty & Moves -->
-        <div class="difficulty-indicator" id="difficulty">Easy Mode</div>
-        <div class="moves-counter">Moves: <span id="moveCount">0</span></div>
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <h1 class="hero-title">🧩 Challenge Your Mind!</h1>
+            <p class="hero-subtitle">
+                Discover the ultimate collection of free online puzzle games. Train your brain, 
+                solve challenging puzzles, and compete with players worldwide!
+            </p>
+            <a href="#games" class="cta-button">🎯 Play Now - It's Free!</a>
+            
+            <!-- Top Banner Ad Placeholder -->
+            <div class="ad-container banner">
+                📺 Header Banner Ad (728x90) - AdSense Ready
+            </div>
+        </section>
 
-        <!-- Recording Indicator -->
-        <div class="record-indicator" id="recordIndicator">🔴 Recording for TikTok</div>
-
-        <!-- Game Area -->
-        <div class="game-area">
-            <div class="puzzle-grid" id="puzzleGrid"></div>
-        </div>
-
-        <!-- Viral Challenge Banner -->
-        <div class="viral-challenge">
-            📱 Can you solve it faster than your friends? 📱
-        </div>
-
-        <!-- TikTok-style UI -->
-        <div class="tiktok-ui">
-            <div class="tiktok-btn" onclick="toggleRecord()" title="Record">🎥</div>
-            <div class="tiktok-btn" onclick="shareChallenge()" title="Share">📤</div>
-            <div class="tiktok-btn" onclick="newChallenge()" title="New">🔄</div>
-        </div>
-
-        <!-- Controls -->
-        <div class="controls">
-            <button class="btn" onclick="resetPuzzle()">Reset 🔄</button>
-            <button class="btn btn-share" onclick="shareScore()">Share Challenge 📱</button>
-            <button class="btn" onclick="nextLevel()">Harder 🔥</button>
-        </div>
-
-        <!-- Victory Modal -->
-        <div class="victory-modal" id="victoryModal">
-            <div class="victory-content">
-                <div class="victory-title">🎉 SOLVED! 🎉</div>
-                <div class="victory-stats">
-                    <div>⏱️ Time: <span id="finalTime">0</span>s</div>
-                    <div>🎯 Moves: <span id="finalMoves">0</span></div>
-                    <div>⭐ Difficulty: <span id="finalDifficulty">Easy</span></div>
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <h2>🏆 Join Our Gaming Community</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">50,000+</div>
+                    <div class="stat-label">Players Worldwide</div>
                 </div>
-                <div style="margin: 20px 0; font-size: 16px;">
-                    Challenge your friends! Can they beat your time? 🤔
+                <div class="stat-item">
+                    <div class="stat-number">1M+</div>
+                    <div class="stat-label">Puzzles Solved</div>
                 </div>
-                <button class="btn btn-share" onclick="sharePerfectScore()">
-                    📱 Share on TikTok
-                </button>
-                <button class="btn" onclick="playAgain()">Play Again 🎮</button>
+                <div class="stat-item">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Brain Games</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Free to Play</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Games Section -->
+        <section id="games" class="games-section">
+            <!-- Sidebar Ad Placeholder -->
+            <div class="ad-container sidebar">
+                📱 Sidebar Ad<br>(300x250)<br>AdSense Ready
+            </div>
+            
+            <div class="games-grid">
+                <div class="game-card">
+                    <div class="game-icon">🧩</div>
+                    <h3 class="game-title">TikTok Puzzle Challenge</h3>
+                    <p class="game-description">
+                        The viral sliding puzzle that's taking TikTok by storm! Can you solve it in under 30 seconds? 
+                        Challenge your friends and see who's the real puzzle master!
+                    </p>
+                    <a href="tiktok-puzzle.html" class="play-button">🎮 Play Now</a>
+                </div>
+
+                <div class="game-card">
+                    <div class="game-icon">🀄</div>
+                    <h3 class="game-title">Mahjong Merge Puzzle</h3>
+                    <p class="game-description">
+                        Match traditional Mahjong tiles in this addictive merge puzzle! Combine identical tiles, 
+                        create powerful combos, and master the ancient art of Mahjong.
+                    </p>
+                    <a href="mahjong-merge.html" class="play-button">🎮 Play Now</a>
+                </div>
+
+                <div class="game-card">
+                    <div class="game-icon">🧧</div>
+                    <h3 class="game-title">Lucky Red Envelope</h3>
+                    <p class="game-description">
+                        Pop falling red envelopes to collect lucky coins! Test your reflexes in this fast-paced 
+                        arcade game inspired by traditional Chinese culture.
+                    </p>
+                    <a href="lucky-envelope.html" class="play-button">🎮 Play Now</a>
+                </div>
+
+                <div class="game-card">
+                    <div class="game-icon">🎯</div>
+                    <h3 class="game-title">Brain Training Suite</h3>
+                    <p class="game-description">
+                        Complete collection of mind games designed to improve memory, focus, and problem-solving skills. 
+                        Track your progress and compete with friends!
+                    </p>
+                    <a href="brain-training.html" class="play-button">🎮 Coming Soon</a>
+                </div>
+
+                <div class="game-card">
+                    <div class="game-icon">🔍</div>
+                    <h3 class="game-title">Word Hunt Challenge</h3>
+                    <p class="game-description">
+                        Find hidden words in challenging letter grids! Multiple difficulty levels and themes 
+                        to keep your vocabulary skills sharp and entertained.
+                    </p>
+                    <a href="word-hunt.html" class="play-button">🎮 Coming Soon</a>
+                </div>
+
+                <div class="game-card">
+                    <div class="game-icon">🧮</div>
+                    <h3 class="game-title">Number Logic Puzzles</h3>
+                    <p class="game-description">
+                        Mathematical puzzles that challenge your logical thinking! From Sudoku variants to 
+                        custom number challenges that will test your analytical skills.
+                    </p>
+                    <a href="number-logic.html" class="play-button">🎮 Coming Soon</a>
+                </div>
+            </div>
+
+            <!-- In-content Ad Placeholder -->
+            <div class="ad-container">
+                📺 In-Content Ad (728x90 or 320x100 mobile) - AdSense Ready
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <div class="features-container">
+                <h2 class="features-title">🌟 Why Choose GoTools Games?</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">🆓</div>
+                        <h3>100% Free to Play</h3>
+                        <p>All our games are completely free! No hidden fees, no premium subscriptions. Just pure gaming fun!</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📱</div>
+                        <h3>Mobile Optimized</h3>
+                        <p>Play anywhere, anytime! Our games work perfectly on phones, tablets, and desktop computers.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🧠</div>
+                        <h3>Brain Training</h3>
+                        <p>Scientifically designed puzzles that improve memory, focus, and cognitive abilities while having fun!</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🏆</div>
+                        <h3>Compete & Share</h3>
+                        <p>Challenge friends, share your scores on social media, and climb the global leaderboards!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>🎮 Games</h3>
+                <a href="tiktok-puzzle.html">TikTok Puzzle Challenge</a>
+                <a href="mahjong-merge.html">Mahjong Merge Puzzle</a>
+                <a href="lucky-envelope.html">Lucky Red Envelope</a>
+                <a href="#games">View All Games</a>
+            </div>
+            <div class="footer-section">
+                <h3>📋 Legal</h3>
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="cookie-policy.html">Cookie Policy</a>
+                <a href="disclaimer.html">Disclaimer</a>
+            </div>
+            <div class="footer-section">
+                <h3>📞 Support</h3>
+                <a href="contact.html">Contact Us</a>
+                <a href="faq.html">FAQ</a>
+                <a href="feedback.html">Send Feedback</a>
+                <a href="report-bug.html">Report a Bug</a>
+            </div>
+            <div class="footer-section">
+                <h3>🌐 Connect</h3>
+                <a href="https://tiktok.com/@gotoolsgames" target="_blank">TikTok</a>
+                <a href="https://instagram.com/gotoolsgames" target="_blank">Instagram</a>
+                <a href="https://youtube.com/@gotoolsgames" target="_blank">YouTube</a>
+                <a href="https://twitter.com/gotoolsgames" target="_blank">Twitter</a>
             </div>
         </div>
-    </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 GoTools Games. All rights reserved. | Made with ❤️ for puzzle lovers worldwide</p>
+        </div>
+    </footer>
 
     <script>
-        class TikTokPuzzleChallenge {
-            constructor() {
-                this.gridSize = 4;
-                this.puzzle = [];
-                this.solution = [];
-                this.emptyPos = { row: 3, col: 3 };
-                this.moves = 0;
-                this.timeLeft = 30;
-                this.difficulty = 1;
-                this.gameActive = false;
-                this.isRecording = false;
-                
-                this.difficulties = [
-                    { name: "Easy", scrambles: 10, time: 30 },
-                    { name: "Medium", scrambles: 20, time: 25 },
-                    { name: "Hard", scrambles: 30, time: 20 },
-                    { name: "Expert", scrambles: 50, time: 15 },
-                    { name: "Impossible", scrambles: 100, time: 10 }
-                ];
-                
-                this.init();
-            }
-
-            init() {
-                this.generatePuzzle();
-                this.startTimer();
-                this.renderPuzzle();
-                this.updateUI();
-            }
-
-            generatePuzzle() {
-                // Create solved state (1-15 + empty)
-                this.solution = [];
-                let num = 1;
-                for (let row = 0; row < 4; row++) {
-                    this.solution[row] = [];
-                    for (let col = 0; col < 4; col++) {
-                        if (row === 3 && col === 3) {
-                            this.solution[row][col] = 0; // Empty space
-                        } else {
-                            this.solution[row][col] = num++;
-                        }
-                    }
-                }
-
-                // Copy solution and scramble
-                this.puzzle = this.solution.map(row => [...row]);
-                this.scramblePuzzle();
-            }
-
-            scramblePuzzle() {
-                const scrambles = this.difficulties[this.difficulty - 1].scrambles;
-                const moves = ['up', 'down', 'left', 'right'];
-                
-                for (let i = 0; i < scrambles; i++) {
-                    const validMoves = this.getValidMoves();
-                    if (validMoves.length > 0) {
-                        const randomMove = validMoves[Math.floor(Math.random() * validMoves.length)];
-                        this.moveTile(randomMove.row, randomMove.col, false);
-                    }
-                }
-                
-                this.moves = 0; // Reset move counter after scrambling
-                this.gameActive = true;
-            }
-
-            getValidMoves() {
-                const moves = [];
-                const { row: emptyRow, col: emptyCol } = this.emptyPos;
-                
-                // Check all adjacent positions
-                const directions = [
-                    { row: -1, col: 0 }, // up
-                    { row: 1, col: 0 },  // down
-                    { row: 0, col: -1 }, // left
-                    { row: 0, col: 1 }   // right
-                ];
-                
-                directions.forEach(dir => {
-                    const newRow = emptyRow + dir.row;
-                    const newCol = emptyCol + dir.col;
-                    
-                    if (newRow >= 0 && newRow < 4 && newCol >= 0 && newCol < 4) {
-                        moves.push({ row: newRow, col: newCol });
-                    }
-                });
-                
-                return moves;
-            }
-
-            renderPuzzle() {
-                const grid = document.getElementById('puzzleGrid');
-                grid.innerHTML = '';
-                
-                for (let row = 0; row < 4; row++) {
-                    for (let col = 0; col < 4; col++) {
-                        const piece = document.createElement('div');
-                        piece.className = 'puzzle-piece';
-                        piece.dataset.row = row;
-                        piece.dataset.col = col;
-                        
-                        if (this.puzzle[row][col] === 0) {
-                            piece.classList.add('empty');
-                        } else {
-                            piece.textContent = this.puzzle[row][col];
-                            piece.addEventListener('click', () => this.handleTileClick(row, col));
-                            
-                            // Check if piece is in correct position
-                            if (this.puzzle[row][col] === this.solution[row][col]) {
-                                piece.classList.add('correct');
-                            }
-                        }
-                        
-                        grid.appendChild(piece);
-                    }
-                }
-            }
-
-            handleTileClick(row, col) {
-                if (!this.gameActive) return;
-                
-                // Check if tile is adjacent to empty space
-                const { row: emptyRow, col: emptyCol } = this.emptyPos;
-                const isAdjacent = (Math.abs(row - emptyRow) === 1 && col === emptyCol) ||
-                                  (Math.abs(col - emptyCol) === 1 && row === emptyRow);
-                
-                if (isAdjacent) {
-                    this.moveTile(row, col, true);
-                }
-            }
-
-            moveTile(row, col, countMove = true) {
-                // Swap tile with empty space
-                const { row: emptyRow, col: emptyCol } = this.emptyPos;
-                
-                this.puzzle[emptyRow][emptyCol] = this.puzzle[row][col];
-                this.puzzle[row][col] = 0;
-                
-                this.emptyPos = { row, col };
-                
-                if (countMove) {
-                    this.moves++;
-                    this.updateUI();
-                    this.renderPuzzle();
-                    
-                    // Check win condition
-                    if (this.checkWin()) {
-                        this.gameWin();
-                    }
-                }
-            }
-
-            checkWin() {
-                for (let row = 0; row < 4; row++) {
-                    for (let col = 0; col < 4; col++) {
-                        if (this.puzzle[row][col] !== this.solution[row][col]) {
-                            return false;
-                        }
-                    }
-                }
-                return true;
-            }
-
-            gameWin() {
-                this.gameActive = false;
-                
-                document.getElementById('finalTime').textContent = 30 - this.timeLeft;
-                document.getElementById('finalMoves').textContent = this.moves;
-                document.getElementById('finalDifficulty').textContent = this.difficulties[this.difficulty - 1].name;
-                document.getElementById('victoryModal').style.display = 'flex';
-                
-                // Create shareable stats
-                this.currentStats = {
-                    time: 30 - this.timeLeft,
-                    moves: this.moves,
-                    difficulty: this.difficulties[this.difficulty - 1].name
-                };
-            }
-
-            startTimer() {
-                this.timeLeft = this.difficulties[this.difficulty - 1].time;
-                this.updateUI();
-                
-                this.timerInterval = setInterval(() => {
-                    this.timeLeft--;
-                    this.updateUI();
-                    
-                    if (this.timeLeft <= 0) {
-                        this.gameOver();
-                    }
-                }, 1000);
-            }
-
-            gameOver() {
-                clearInterval(this.timerInterval);
-                this.gameActive = false;
-                alert('⏰ Time\'s up! Challenge your friends to beat this puzzle! 🤔');
-                this.shareChallenge();
-            }
-
-            updateUI() {
-                document.getElementById('timer').textContent = this.timeLeft;
-                document.getElementById('moveCount').textContent = this.moves;
-                document.getElementById('difficulty').textContent = this.difficulties[this.difficulty - 1].name + ' Mode';
-            }
-
-            // TikTok Integration Functions
-            shareChallenge() {
-                const challengeText = `🧩 Can you solve this ${this.difficulties[this.difficulty - 1].name} puzzle in ${this.difficulties[this.difficulty - 1].time} seconds? 
-                
-🎯 My stats:
-⏱️ Time: ${this.currentStats ? this.currentStats.time : '?'}s
-🎯 Moves: ${this.currentStats ? this.currentStats.moves : '?'}
-⭐ Level: ${this.currentStats ? this.currentStats.difficulty : this.difficulties[this.difficulty - 1].name}
-
-Challenge accepted? 🔥
-#PuzzleChallenge #BrainTeaser #TikTokChallenge #CanYouSolveIt`;
-
-                if (navigator.share) {
-                    navigator.share({
-                        title: 'TikTok Puzzle Challenge',
-                        text: challengeText,
-                        url: window.location.href
-                    });
-                } else {
-                    navigator.clipboard.writeText(challengeText + '\n' + window.location.href);
-                    alert('Challenge copied! Paste it on TikTok! 📱');
-                }
-            }
-
-            sharePerfectScore() {
-                const perfectText = `🎉 SOLVED IT! 🎉
-
-🧩 ${this.currentStats.difficulty} Puzzle Challenge
-⏱️ Time: ${this.currentStats.time} seconds  
-🎯 Moves: ${this.currentStats.moves}
-
-Think you can beat my score? 🤔
-Tag 3 friends who think they're smart! 😏
-
-#PuzzleChallenge #Solved #BrainTeaser #SmartMove #ChallengAccepted`;
-
-                if (navigator.share) {
-                    navigator.share({
-                        title: 'I Solved The Puzzle Challenge!',
-                        text: perfectText,
-                        url: window.location.href
-                    });
-                } else {
-                    navigator.clipboard.writeText(perfectText + '\n' + window.location.href);
-                    alert('Victory post copied! Share on TikTok! 🎉');
-                }
-                
-                document.getElementById('victoryModal').style.display = 'none';
-            }
-
-            toggleRecord() {
-                this.isRecording = !this.isRecording;
-                const indicator = document.getElementById('recordIndicator');
-                
-                if (this.isRecording) {
-                    indicator.style.display = 'block';
-                    alert('📱 Perfect! Now solve the puzzle for your TikTok! 🎥');
-                } else {
-                    indicator.style.display = 'none';
-                }
-            }
-
-            nextLevel() {
-                if (this.difficulty < 5) {
-                    this.difficulty++;
-                    this.resetGame();
-                } else {
-                    alert('🔥 You\'ve reached IMPOSSIBLE mode! You\'re a puzzle master! 👑');
-                }
-            }
-
-            resetGame() {
-                clearInterval(this.timerInterval);
-                this.moves = 0;
-                this.gameActive = false;
-                this.generatePuzzle();
-                this.startTimer();
-                this.renderPuzzle();
-                this.updateUI();
-            }
-
-            playAgain() {
-                document.getElementById('victoryModal').style.display = 'none';
-                this.resetGame();
-            }
-        }
-
-        // Global game instance
-        let game;
-
-        // Initialize game
-        window.addEventListener('load', () => {
-            game = new TikTokPuzzleChallenge();
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            const navMenu = document.querySelector('.nav-menu');
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
         });
 
-        // Global functions for buttons
-        function resetPuzzle() {
-            game.resetGame();
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Game tracking for analytics
+        function trackGamePlay(gameName) {
+            // Analytics code will go here
+            console.log(`Game played: ${gameName}`);
+            
+            // Example: Google Analytics event
+            // gtag('event', 'game_play', {
+            //     'game_name': gameName,
+            //     'engagement_time_msec': Date.now()
+            // });
         }
 
-        function shareScore() {
-            game.shareChallenge();
+        // Add click tracking to game buttons
+        document.querySelectorAll('.play-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const gameTitle = this.parentElement.querySelector('.game-title').textContent;
+                trackGamePlay(gameTitle);
+            });
+        });
+
+        // Lazy loading for better performance
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
         }
 
-        function nextLevel() {
-            game.nextLevel();
-        }
-
-        function newChallenge() {
-            game.resetGame();
-        }
-
-        function shareChallenge() {
-            game.shareChallenge();
-        }
-
-        function toggleRecord() {
-            game.toggleRecord();
-        }
-
-        function playAgain() {
-            game.playAgain();
-        }
-
-        function sharePerfectScore() {
-            game.sharePerfectScore();
-        }
-
-        // Prevent context menu and zoom
-        document.addEventListener('contextmenu', e => e.preventDefault());
+        // Page view analytics
+        document.addEventListener('DOMContentLoaded', function() {
+            // Track page view
+            console.log('Page loaded: Homepage');
+            
+            // Initialize any ad code here
+            // initializeAds();
+        });
     </script>
+
+    <!-- Google Analytics Placeholder -->
+    <!-- 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+    -->
+
+    <!-- Google AdSense Placeholder -->
+    <!--
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    -->
 </body>
 </html>
