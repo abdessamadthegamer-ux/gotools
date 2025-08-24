@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok Puzzle Challenge - Can You Solve It?</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+            touch-action: manipulation;
+            color: white;
+        }
+
+        .game-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .header {
+            background: rgba(0,0,0,0.8);
+            padding: 15px 20px;
+            text-align: center;
+            border-bottom: 3px solid #ff6b6b;
+        }
+
+        .challenge-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .timer {
+            font-size: 24px;
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        .game-area {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .puzzle-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            gap: 8px;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 20px;
+            border: 3px solid #ffd700;
+        }
+
+        .puzzle-piece {
+            background: linear-gradient(145deg, #ff6b6b, #ee5a52);
+            border: 2px solid #fff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .puzzle-piece:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        .puzzle-piece.empty {
+            background: rgba(255,255,255,0.2);
+            border: 2px dashed rgba(255,255,255,0.5);
+        }
+
+        .puzzle-piece.correct {
+            background: linear-gradient(145deg, #00b894, #00a085);
+            animation: correctPulse 0.6s ease;
+        }
+
+        @keyframes correctPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .controls {
+            background: rgba(0,0,0,0.7);
+            padding: 20px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #333;
+            transition: transform 0.2s ease;
+            min-width: 100px;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-share {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            color: white;
+            animation: shareGlow 2s infinite;
+        }
+
+        @keyframes shareGlow {
+            0%, 100% { box-shadow: 0 0 10px rgba(255, 107, 107, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(255, 107, 107, 0.8); }
+        }
+
+        .victory-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .victory-content {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            border: 3px solid #ffd700;
+            max-width: 90%;
+        }
+
+        .victory-title {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #ffd700;
+        }
+
+        .victory-stats {
+            font-size: 18px;
+            margin: 15px 0;
+        }
+
+        .viral-challenge {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 107, 107, 0.9);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            animation: bounce 2s infinite;
+            z-index: 500;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        .difficulty-indicator {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 107, 107, 0.8);
+            padding: 8px 15px;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .moves-counter {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 184, 148, 0.8);
+            padding: 8px 15px;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* TikTok-style elements */
+        .tiktok-ui {
+            position: fixed;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 600;
+        }
+
+        .tiktok-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid white;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .tiktok-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .record-indicator {
+            position: fixed;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ff0040;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            display: none;
+            animation: recordBlink 1s infinite;
+        }
+
+        @keyframes recordBlink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="challenge-title">🔥 Daily Puzzle Challenge 🔥</div>
+            <div class="timer" id="timer">30</div>
+        </div>
+
+        <!-- Difficulty & Moves -->
+        <div class="difficulty-indicator" id="difficulty">Easy Mode</div>
+        <div class="moves-counter">Moves: <span id="moveCount">0</span></div>
+
+        <!-- Recording Indicator -->
+        <div class="record-indicator" id="recordIndicator">🔴 Recording for TikTok</div>
+
+        <!-- Game Area -->
+        <div class="game-area">
+            <div class="puzzle-grid" id="puzzleGrid"></div>
+        </div>
+
+        <!-- Viral Challenge Banner -->
+        <div class="viral-challenge">
+            📱 Can you solve it faster than your friends? 📱
+        </div>
+
+        <!-- TikTok-style UI -->
+        <div class="tiktok-ui">
+            <div class="tiktok-btn" onclick="toggleRecord()" title="Record">🎥</div>
+            <div class="tiktok-btn" onclick="shareChallenge()" title="Share">📤</div>
+            <div class="tiktok-btn" onclick="newChallenge()" title="New">🔄</div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <button class="btn" onclick="resetPuzzle()">Reset 🔄</button>
+            <button class="btn btn-share" onclick="shareScore()">Share Challenge 📱</button>
+            <button class="btn" onclick="nextLevel()">Harder 🔥</button>
+        </div>
+
+        <!-- Victory Modal -->
+        <div class="victory-modal" id="victoryModal">
+            <div class="victory-content">
+                <div class="victory-title">🎉 SOLVED! 🎉</div>
+                <div class="victory-stats">
+                    <div>⏱️ Time: <span id="finalTime">0</span>s</div>
+                    <div>🎯 Moves: <span id="finalMoves">0</span></div>
+                    <div>⭐ Difficulty: <span id="finalDifficulty">Easy</span></div>
+                </div>
+                <div style="margin: 20px 0; font-size: 16px;">
+                    Challenge your friends! Can they beat your time? 🤔
+                </div>
+                <button class="btn btn-share" onclick="sharePerfectScore()">
+                    📱 Share on TikTok
+                </button>
+                <button class="btn" onclick="playAgain()">Play Again 🎮</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class TikTokPuzzleChallenge {
+            constructor() {
+                this.gridSize = 4;
+                this.puzzle = [];
+                this.solution = [];
+                this.emptyPos = { row: 3, col: 3 };
+                this.moves = 0;
+                this.timeLeft = 30;
+                this.difficulty = 1;
+                this.gameActive = false;
+                this.isRecording = false;
+                
+                this.difficulties = [
+                    { name: "Easy", scrambles: 10, time: 30 },
+                    { name: "Medium", scrambles: 20, time: 25 },
+                    { name: "Hard", scrambles: 30, time: 20 },
+                    { name: "Expert", scrambles: 50, time: 15 },
+                    { name: "Impossible", scrambles: 100, time: 10 }
+                ];
+                
+                this.init();
+            }
+
+            init() {
+                this.generatePuzzle();
+                this.startTimer();
+                this.renderPuzzle();
+                this.updateUI();
+            }
+
+            generatePuzzle() {
+                // Create solved state (1-15 + empty)
+                this.solution = [];
+                let num = 1;
+                for (let row = 0; row < 4; row++) {
+                    this.solution[row] = [];
+                    for (let col = 0; col < 4; col++) {
+                        if (row === 3 && col === 3) {
+                            this.solution[row][col] = 0; // Empty space
+                        } else {
+                            this.solution[row][col] = num++;
+                        }
+                    }
+                }
+
+                // Copy solution and scramble
+                this.puzzle = this.solution.map(row => [...row]);
+                this.scramblePuzzle();
+            }
+
+            scramblePuzzle() {
+                const scrambles = this.difficulties[this.difficulty - 1].scrambles;
+                const moves = ['up', 'down', 'left', 'right'];
+                
+                for (let i = 0; i < scrambles; i++) {
+                    const validMoves = this.getValidMoves();
+                    if (validMoves.length > 0) {
+                        const randomMove = validMoves[Math.floor(Math.random() * validMoves.length)];
+                        this.moveTile(randomMove.row, randomMove.col, false);
+                    }
+                }
+                
+                this.moves = 0; // Reset move counter after scrambling
+                this.gameActive = true;
+            }
+
+            getValidMoves() {
+                const moves = [];
+                const { row: emptyRow, col: emptyCol } = this.emptyPos;
+                
+                // Check all adjacent positions
+                const directions = [
+                    { row: -1, col: 0 }, // up
+                    { row: 1, col: 0 },  // down
+                    { row: 0, col: -1 }, // left
+                    { row: 0, col: 1 }   // right
+                ];
+                
+                directions.forEach(dir => {
+                    const newRow = emptyRow + dir.row;
+                    const newCol = emptyCol + dir.col;
+                    
+                    if (newRow >= 0 && newRow < 4 && newCol >= 0 && newCol < 4) {
+                        moves.push({ row: newRow, col: newCol });
+                    }
+                });
+                
+                return moves;
+            }
+
+            renderPuzzle() {
+                const grid = document.getElementById('puzzleGrid');
+                grid.innerHTML = '';
+                
+                for (let row = 0; row < 4; row++) {
+                    for (let col = 0; col < 4; col++) {
+                        const piece = document.createElement('div');
+                        piece.className = 'puzzle-piece';
+                        piece.dataset.row = row;
+                        piece.dataset.col = col;
+                        
+                        if (this.puzzle[row][col] === 0) {
+                            piece.classList.add('empty');
+                        } else {
+                            piece.textContent = this.puzzle[row][col];
+                            piece.addEventListener('click', () => this.handleTileClick(row, col));
+                            
+                            // Check if piece is in correct position
+                            if (this.puzzle[row][col] === this.solution[row][col]) {
+                                piece.classList.add('correct');
+                            }
+                        }
+                        
+                        grid.appendChild(piece);
+                    }
+                }
+            }
+
+            handleTileClick(row, col) {
+                if (!this.gameActive) return;
+                
+                // Check if tile is adjacent to empty space
+                const { row: emptyRow, col: emptyCol } = this.emptyPos;
+                const isAdjacent = (Math.abs(row - emptyRow) === 1 && col === emptyCol) ||
+                                  (Math.abs(col - emptyCol) === 1 && row === emptyRow);
+                
+                if (isAdjacent) {
+                    this.moveTile(row, col, true);
+                }
+            }
+
+            moveTile(row, col, countMove = true) {
+                // Swap tile with empty space
+                const { row: emptyRow, col: emptyCol } = this.emptyPos;
+                
+                this.puzzle[emptyRow][emptyCol] = this.puzzle[row][col];
+                this.puzzle[row][col] = 0;
+                
+                this.emptyPos = { row, col };
+                
+                if (countMove) {
+                    this.moves++;
+                    this.updateUI();
+                    this.renderPuzzle();
+                    
+                    // Check win condition
+                    if (this.checkWin()) {
+                        this.gameWin();
+                    }
+                }
+            }
+
+            checkWin() {
+                for (let row = 0; row < 4; row++) {
+                    for (let col = 0; col < 4; col++) {
+                        if (this.puzzle[row][col] !== this.solution[row][col]) {
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            }
+
+            gameWin() {
+                this.gameActive = false;
+                
+                document.getElementById('finalTime').textContent = 30 - this.timeLeft;
+                document.getElementById('finalMoves').textContent = this.moves;
+                document.getElementById('finalDifficulty').textContent = this.difficulties[this.difficulty - 1].name;
+                document.getElementById('victoryModal').style.display = 'flex';
+                
+                // Create shareable stats
+                this.currentStats = {
+                    time: 30 - this.timeLeft,
+                    moves: this.moves,
+                    difficulty: this.difficulties[this.difficulty - 1].name
+                };
+            }
+
+            startTimer() {
+                this.timeLeft = this.difficulties[this.difficulty - 1].time;
+                this.updateUI();
+                
+                this.timerInterval = setInterval(() => {
+                    this.timeLeft--;
+                    this.updateUI();
+                    
+                    if (this.timeLeft <= 0) {
+                        this.gameOver();
+                    }
+                }, 1000);
+            }
+
+            gameOver() {
+                clearInterval(this.timerInterval);
+                this.gameActive = false;
+                alert('⏰ Time\'s up! Challenge your friends to beat this puzzle! 🤔');
+                this.shareChallenge();
+            }
+
+            updateUI() {
+                document.getElementById('timer').textContent = this.timeLeft;
+                document.getElementById('moveCount').textContent = this.moves;
+                document.getElementById('difficulty').textContent = this.difficulties[this.difficulty - 1].name + ' Mode';
+            }
+
+            // TikTok Integration Functions
+            shareChallenge() {
+                const challengeText = `🧩 Can you solve this ${this.difficulties[this.difficulty - 1].name} puzzle in ${this.difficulties[this.difficulty - 1].time} seconds? 
+                
+🎯 My stats:
+⏱️ Time: ${this.currentStats ? this.currentStats.time : '?'}s
+🎯 Moves: ${this.currentStats ? this.currentStats.moves : '?'}
+⭐ Level: ${this.currentStats ? this.currentStats.difficulty : this.difficulties[this.difficulty - 1].name}
+
+Challenge accepted? 🔥
+#PuzzleChallenge #BrainTeaser #TikTokChallenge #CanYouSolveIt`;
+
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'TikTok Puzzle Challenge',
+                        text: challengeText,
+                        url: window.location.href
+                    });
+                } else {
+                    navigator.clipboard.writeText(challengeText + '\n' + window.location.href);
+                    alert('Challenge copied! Paste it on TikTok! 📱');
+                }
+            }
+
+            sharePerfectScore() {
+                const perfectText = `🎉 SOLVED IT! 🎉
+
+🧩 ${this.currentStats.difficulty} Puzzle Challenge
+⏱️ Time: ${this.currentStats.time} seconds  
+🎯 Moves: ${this.currentStats.moves}
+
+Think you can beat my score? 🤔
+Tag 3 friends who think they're smart! 😏
+
+#PuzzleChallenge #Solved #BrainTeaser #SmartMove #ChallengAccepted`;
+
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'I Solved The Puzzle Challenge!',
+                        text: perfectText,
+                        url: window.location.href
+                    });
+                } else {
+                    navigator.clipboard.writeText(perfectText + '\n' + window.location.href);
+                    alert('Victory post copied! Share on TikTok! 🎉');
+                }
+                
+                document.getElementById('victoryModal').style.display = 'none';
+            }
+
+            toggleRecord() {
+                this.isRecording = !this.isRecording;
+                const indicator = document.getElementById('recordIndicator');
+                
+                if (this.isRecording) {
+                    indicator.style.display = 'block';
+                    alert('📱 Perfect! Now solve the puzzle for your TikTok! 🎥');
+                } else {
+                    indicator.style.display = 'none';
+                }
+            }
+
+            nextLevel() {
+                if (this.difficulty < 5) {
+                    this.difficulty++;
+                    this.resetGame();
+                } else {
+                    alert('🔥 You\'ve reached IMPOSSIBLE mode! You\'re a puzzle master! 👑');
+                }
+            }
+
+            resetGame() {
+                clearInterval(this.timerInterval);
+                this.moves = 0;
+                this.gameActive = false;
+                this.generatePuzzle();
+                this.startTimer();
+                this.renderPuzzle();
+                this.updateUI();
+            }
+
+            playAgain() {
+                document.getElementById('victoryModal').style.display = 'none';
+                this.resetGame();
+            }
+        }
+
+        // Global game instance
+        let game;
+
+        // Initialize game
+        window.addEventListener('load', () => {
+            game = new TikTokPuzzleChallenge();
+        });
+
+        // Global functions for buttons
+        function resetPuzzle() {
+            game.resetGame();
+        }
+
+        function shareScore() {
+            game.shareChallenge();
+        }
+
+        function nextLevel() {
+            game.nextLevel();
+        }
+
+        function newChallenge() {
+            game.resetGame();
+        }
+
+        function shareChallenge() {
+            game.shareChallenge();
+        }
+
+        function toggleRecord() {
+            game.toggleRecord();
+        }
+
+        function playAgain() {
+            game.playAgain();
+        }
+
+        function sharePerfectScore() {
+            game.sharePerfectScore();
+        }
+
+        // Prevent context menu and zoom
+        document.addEventListener('contextmenu', e => e.preventDefault());
+    </script>
+</body>
+</html>
