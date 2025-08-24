@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - GoTools Games</title>
+    <meta name="description" content="Contact GoTools Games - Get in touch for support, feedback, or business inquiries about our puzzle games.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #667eea;
+            padding-left: 1rem;
+        }
+
+        h3 {
+            color: #333;
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p, li {
+            margin-bottom: 0.8rem;
+            text-align: justify;
+        }
+
+        ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-form {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            margin: 2rem 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .contact-info {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .contact-info h3 {
+            color: #ffd700;
+            margin-bottom: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .contact-item i {
+            margin-right: 1rem;
+            font-size: 1.2rem;
+            color: #ffd700;
+            width: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-top: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .back-link:hover {
+            transform: scale(1.05);
+        }
+
+        .highlight-box {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            margin: 2rem 0;
+        }
+
+        .social-links {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .social-links h3 {
+            color: #ffd700;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 1rem;
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">📞 GoTools Games</div>
+            <h1>Contact Us</h1>
+        </div>
+
+        <p>
+            We'd love to hear from you! Whether you have questions, feedback, suggestions for new games, or need technical support, our team is here to help. Get in touch using any of the methods below.
+        </p>
+
+        <div class="contact-info">
+            <h3>📍 Contact Information</h3>
+            <div class="contact-item">
+                <i>🌐</i>
+                <div>
+                    <strong>Website:</strong> gotools.xyz<br>
+                    <strong>Main Games Portal:</strong> Available 24/7
+                </div>
+            </div>
+            <div class="contact-item">
+                <i>📧</i>
+                <div>
+                    <strong>Email:</strong> contact@gotools.xyz<br>
+                    <strong>Response Time:</strong> Within 24 hours
+                </div>
+            </div>
+            <div class="contact-item">
+                <i>🕐</i>
+                <div>
+                    <strong>Business Hours:</strong> Monday - Friday, 9:00 AM - 6:00 PM<br>
+                    <strong>Support:</strong> Available 7 days a week
+                </div>
+            </div>
+        </div>
+
+        <h2>📝 Send Us a Message</h2>
+        <div class="contact-form">
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Subject *</label>
+                    <select id="subject" name="subject" required>
+                        <option value="">Please select a topic</option>
+                        <option value="general">General Inquiry</option>
+                        <option value="support">Technical Support</option>
+                        <option value="feedback">Game Feedback</option>
+                        <option value="suggestion">Game Suggestions</option>
+                        <option value="bug">Bug Report</option>
+                        <option value="partnership">Partnership Inquiry</option>
+                        <option value="press">Press & Media</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" rows="6" placeholder="Please provide as much detail as possible..." required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="device">Device/Browser (for technical issues)</label>
+                    <input type="text" id="device" name="device" placeholder="e.g., iPhone 12, Chrome Browser, Windows 10">
+                </div>
+                
+                <button type="submit" class="submit-btn">Send Message 📤</button>
+            </form>
+        </div>
+
+        <h2>🎮 Specific Inquiries</h2>
+        <div class="highlight-box">
+            <h3>For Game Support:</h3>
+            <ul>
+                <li><strong>Technical Issues:</strong> Include your device/browser information and describe the problem step by step</li>
+                <li><strong>Game Suggestions:</strong> We love hearing ideas for new puzzles and game mechanics</li>
+                <li><strong>Score/Progress Issues:</strong> Provide your username and details about the specific game</li>
+                <li><strong>Bug Reports:</strong> Help us improve by reporting any issues you encounter</li>
+            </ul>
+            
+            <h3>For Business Inquiries:</h3>
+            <ul>
+                <li><strong>Partnerships:</strong> Educational institutions, content creators, and gaming platforms</li>
+                <li><strong>Advertising:</strong> Brand integration and sponsorship opportunities</li>
+                <li><strong>Licensing:</strong> Use our games on your platform or website</li>
+                <li><strong>Press & Media:</strong> Interviews, reviews, and media coverage</li>
+            </ul>
+        </div>
+
+        <h2>❓ Frequently Asked Questions</h2>
+        <div class="highlight-box">
+            <h3>How can I report a bug?</h3>
+            <p>Use the contact form above with "Bug Report" as the subject. Please include your device/browser information and detailed steps to reproduce the issue.</p>
+            
+            <h3>Can I suggest new game ideas?</h3>
+            <p>Absolutely! We love hearing from our community. Use the "Game Suggestions" option in the contact form and share your creative ideas with us.</p>
+            
+            <h3>Are your games really free?</h3>
+            <p>Yes! All our games are completely free to play. We support our platform through ethical advertising that doesn't interfere with gameplay.</p>
+            
+            <h3>Do you collect personal information?</h3>
+            <p>We only collect minimal information necessary to improve our games and provide support. Please read our <a href="privacy-policy.html" style="color: #667eea;">Privacy Policy</a> for full details.</p>
+            
+            <h3>How quickly do you respond to messages?</h3>
+            <p>We aim to respond to all inquiries within 24 hours during business days. Technical support requests are prioritized and often answered sooner.</p>
+            
+            <h3>Can I collaborate with GoTools Games?</h3>
+            <p>We're always open to partnerships, collaborations, and innovative ideas. Use the "Partnership Inquiry" option to discuss potential opportunities.</p>
+        </div>
+
+        <div class="social-links">
+            <h3>🌐 Follow Us on Social Media</h3>
+            <p>Stay updated with new games, features, and community events:</p>
+            <p style="margin-top: 1rem;">
+                <strong>TikTok:</strong> @gotoolsgames<br>
+                <strong>Instagram:</strong> @gotoolsgames<br>
+                <strong>YouTube:</strong> GoTools Games<br>
+                <strong>Twitter:</strong> @gotoolsgames
+            </p>
+            <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.9;">
+                Follow us for puzzle tips, new game announcements, and behind-the-scenes content!
+            </p>
+        </div>
+
+        <div class="highlight-box">
+            <h3>📧 Alternative Contact Methods</h3>
+            <p>
+                <strong>General Questions:</strong> contact@gotools.xyz<br>
+                <strong>Technical Support:</strong> support@gotools.xyz<br>
+                <strong>Business Inquiries:</strong> business@gotools.xyz<br>
+                <strong>Press & Media:</strong> press@gotools.xyz
+            </p>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">
+                <em>All email addresses forward to our main support team, but using specific addresses helps us categorize and prioritize your inquiry.</em>
+            </p>
+        </div>
+
+        <div style="text-align: center; margin: 2rem 0; padding: 1.5rem; background: rgba(102, 126, 234, 0.1); border-radius: 10px;">
+            <h3 style="color: #667eea; margin-bottom: 1rem;">Thank You!</h3>
+            <p>
+                We appreciate your interest in GoTools Games and look forward to hearing from you. 
+                Your feedback helps us create better gaming experiences for our community.
+            </p>
+        </div>
+
+        <a href="index.html" class="back-link">← Back to Home</a>
+    </div>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const formObject = {};
+            formData.forEach((value, key) => {
+                formObject[key] = value;
+            });
+            
+            // Simulate form submission (replace with actual form handler)
+            alert('Thank you for your message! We will get back to you within 24 hours.');
+            
+            // Reset form
+            this.reset();
+            
+            // In a real implementation, you would send this data to your server:
+            // fetch('/contact', { method: 'POST', body: formData })
+        });
+
+        // Form validation
+        document.querySelectorAll('input[required], textarea[required], select[required]').forEach(field => {
+            field.addEventListener('blur', function() {
+                if (!this.value.trim()) {
+                    this.style.borderColor = '#e74c3c';
+                } else {
+                    this.style.borderColor = '#27ae60';
+                }
+            });
+        });
+
+        // Email validation
+        document.getElementById('email').addEventListener('blur', function() {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(this.value)) {
+                this.style.borderColor = '#e74c3c';
+            } else {
+                this.style.borderColor = '#27ae60';
+            }
+        });
+
+        // Character count for message field
+        const messageField = document.getElementById('message');
+        const messageGroup = messageField.parentElement;
+        
+        const charCounter = document.createElement('div');
+        charCounter.style.textAlign = 'right';
+        charCounter.style.fontSize = '0.8rem';
+        charCounter.style.color = '#666';
+        charCounter.style.marginTop = '0.5rem';
+        messageGroup.appendChild(charCounter);
+        
+        messageField.addEventListener('input', function() {
+            const length = this.value.length;
+            charCounter.textContent = `${length}/1000 characters`;
+            
+            if (length > 1000) {
+                charCounter.style.color = '#e74c3c';
+                this.style.borderColor = '#e74c3c';
+            } else if (length > 800) {
+                charCounter.style.color = '#f39c12';
+                this.style.borderColor = '#f39c12';
+            } else {
+                charCounter.style.color = '#666';
+                this.style.borderColor = '#ddd';
+            }
+        });
+    </script>
+</body>
+</html>
